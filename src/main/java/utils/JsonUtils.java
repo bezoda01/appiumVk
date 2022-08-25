@@ -77,7 +77,7 @@ public class JsonUtils {
         ObjectMapper mapper = new ObjectMapper();
         HashMap<String, Object> map = null;
         try {
-            map = mapper.readValue(config.get("caps").toString(), HashMap.class);
+            map = mapper.readValue(caps.get("caps").toString(), HashMap.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

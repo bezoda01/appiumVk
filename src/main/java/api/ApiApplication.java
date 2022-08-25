@@ -8,8 +8,9 @@ import models.postModel.PostMessageModel;
 import models.requestPhotoModel.RequestPhotoModel;
 import utils.APIUtils;
 import utils.JsonUtils;
-
 import java.net.URLEncoder;
+
+import static settings.Settings.*;
 
 public class ApiApplication {
 
@@ -45,7 +46,7 @@ public class ApiApplication {
     }
 
     public static PostPhotoModel getPhotoAttribute(String inquiry) {
-        ResponseModel responseModel = APIUtils.postUploadFile(inquiry, "photo", Constants.environment.getConfig().getApi().getFilePath());
+        ResponseModel responseModel = APIUtils.postUploadFile(inquiry, "photo", config.get("filePath").toString());
         return JsonUtils.jsonStringToObject(responseModel.getBody(), PostPhotoModel.class);
     }
 

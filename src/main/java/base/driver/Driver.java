@@ -6,8 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-import static settings.Settings.*;
 import static utils.JsonUtils.*;
+import static settings.Settings.caps;
 
 public class Driver {
     private static AndroidDriver driver;
@@ -21,13 +21,13 @@ public class Driver {
 
     private static AndroidDriver getInstance() {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        Map<String, Object> caps = convertCapsToMap();
-        for(String st: caps.keySet()) {
-            desiredCapabilities.setCapability(st, caps.get(st));
+        Map<String, Object> cap = convertCapsToMap();
+        for(String st: cap.keySet()) {
+            desiredCapabilities.setCapability(st, cap.get(st));
         }
         AndroidDriver driver = null;
         try {
-            driver = new AndroidDriver(new URL(config.get("urlAppium").toString()), desiredCapabilities);
+            driver = new AndroidDriver(new URL(caps.get("urlAppium").toString()), desiredCapabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

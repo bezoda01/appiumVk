@@ -1,6 +1,5 @@
 package utils;
 
-import api.Constants;
 import models.ResponseModel;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,19 +13,20 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static settings.Settings.*;
+
 public class APIUtils {
 
     private static HttpClient client = HttpClientBuilder.create().build();
 
     public static ResponseModel getRequest(String inquiry) {
-        HttpGet get = new HttpGet(Constants.environment.getConfig().getApi().getApiUrl() + inquiry);
+        HttpGet get = new HttpGet(config.get("apiUrl").toString() + inquiry);
         HttpResponse response = null;
         String body = null;
         try {
@@ -44,7 +44,7 @@ public class APIUtils {
     }
 
     public static ResponseModel postRequest(String inquiry, NameValuePair... params) {
-        HttpPost httppost = new HttpPost(Constants.environment.getConfig().getApi() + inquiry);
+        HttpPost httppost = new HttpPost(config.get("apiUrl").toString() + inquiry);
         HttpResponse response = null;
         String body = null;
         List<NameValuePair> list = new ArrayList<NameValuePair>();
